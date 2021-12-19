@@ -1,4 +1,5 @@
-## create an object with the following properties:
+from .team import get_team_by_id
+
 class Player:
     def __init__(self, *args, **kwargs):
 
@@ -74,11 +75,8 @@ class Player:
 
         # Set Piece Data
         self.corners_and_indirect_freekicks_order = kwargs.get('corners_and_indirect_freekicks_order')
-        self.corners_and_indirect_freekicks_text = kwargs.get('corners_and_indirect_freekicks_text')
         self.direct_freekicks_order = kwargs.get('direct_freekicks_order')
-        self.direct_freekicks_text = kwargs.get('direct_freekicks_text')
         self.penalties_order = kwargs.get('penalties_order')
-        self.penalties_text = kwargs.get('penalties_text')
 
     
     def get_position(self):
@@ -216,51 +214,24 @@ class Player:
             'web_name': self.web_name,
 
             'corners_and_indirect_freekicks_order': self.corners_and_indirect_freekicks_order,
-            'corners_and_indirect_freekicks_text': self.corners_and_indirect_freekicks_text,
             'direct_freekicks_order': self.direct_freekicks_order,
-            'direct_freekicks_text': self.direct_freekicks_text,
             'penalties_order': self.penalties_order,
-            'penalties_text': self.penalties_text
         }
 
     def get_team(self):
-        if self.team == 1:
-            return 'Arsenal'
-        elif self.team == 2:
-            return 'Aston Villa'
-        elif self.team == 3:
-            return 'Brentford'
-        elif self.team == 4:
-            return 'Brighton and Hove Albion'
-        elif self.team == 5:
-            return 'Burnley'
-        elif self.team == 6:
-            return 'Chelsea'
-        elif self.team == 7:
-            return 'Crystal Palace'
-        elif self.team == 8:
-            return 'Everton'
-        elif self.team == 9:
-            return 'Leeds United'
-        elif self.team == 10:
-            return 'Leicester City'
-        elif self.team == 11:
-            return 'Liverpool'
-        elif self.team == 12:
-            return 'Manchester City'
-        elif self.team == 13:
-            return 'Manchester United'
-        elif self.team == 14:
-            return 'Newcastle United'
-        elif self.team == 15:
-            return 'Norwich City'
-        elif self.team == 16:
-            return 'Southampton'
-        elif self.team == 17:
-            return 'Tottenham Hotspur'
-        elif self.team == 18:
-            return 'Watford'
-        elif self.team == 19:
-            return 'West Ham'
-        elif self.team == 20:
-            return 'Wolverhampton Wanderers'
+        return get_team_by_id(self.team)
+
+    def get_player_by_id(self, id):
+        return self
+
+    def __str__(self) -> str:
+        return f"{self.first_name} {self.web_name}"
+
+    def __repr__(self) -> str:
+        return f"{self.first_name} {self.web_name}"
+
+    def __eq__(self, other) -> bool:
+        return self.id == other.id
+
+    def __hash__(self) -> int:
+        return self.id

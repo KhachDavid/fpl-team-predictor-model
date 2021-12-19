@@ -1,8 +1,8 @@
+from fantasy_api.get_fixtures import *
 from fantasy_api.get_team import get_my_team
 from fantasy_api.get_player_details import get_player_details
 from fantasy_api.get_generic_data import get_generic_data
 from objects.player import Player
-
 
 def get_players_fantasy_data(my_team, data):
     my_picks = [pick['element'] for pick in my_team['picks']]
@@ -65,11 +65,8 @@ def format_player(player, is_my_team=False, print_player=True):
         print("Ict Index Rank: " + str(player['ict_index_rank']))
         print("Ict Index Rank Type: " + str(player['ict_index_rank_type']))
         print("Corners and indirect freekicks order: "+str(player['corners_and_indirect_freekicks_order']))
-        print("Corners and indirect freekicks text: "+str(player['corners_and_indirect_freekicks_text']))
         print("Direct Freekicks Order: "+str(player['direct_freekicks_order']))
-        print("Direct Freekicks Text: "+str(player['direct_freekicks_text']))
         print("Penalties Order: "+str(player['penalties_order']))
-        print("Penalties Text: "+str(player['penalties_text']))
 
     player = Player(
         id=player['id'],
@@ -120,11 +117,8 @@ def format_player(player, is_my_team=False, print_player=True):
         ict_index_rank=player['ict_index_rank'],
         ict_index_rank_type=player['ict_index_rank_type'],
         corners_and_indirect_freekicks_order=player['corners_and_indirect_freekicks_order'],
-        corners_and_indirect_freekicks_text=player['corners_and_indirect_freekicks_text'],
         direct_freekicks_order=player['direct_freekicks_order'],
-        direct_freekicks_text=player['direct_freekicks_text'],
         penalties_order=player['penalties_order'],
-        penalties_text=player['penalties_text'],
         element_type=player['element_type'],
         selected_by_percent=player['selected_by_percent'],
         is_my_team=is_my_team
@@ -149,4 +143,12 @@ def setup():
         'element_types': element_types
     }
 
-    return my_team, data
+    fixtures = get_fixtures()
+    past_fixtures = get_past_fixtures()
+
+    fixtures_data = {
+        'fixtures': fixtures,
+        'past_fixtures': past_fixtures
+    }
+
+    return my_team, data, fixtures_data

@@ -1,5 +1,5 @@
 import requests
-#from decouple import config
+from decouple import config
 
 ENDPOINT_URL = "https://fantasy.premierleague.com/api"
 
@@ -8,7 +8,7 @@ session = requests.session()
 def get_my_team():
     url = 'https://users.premierleague.com/accounts/login/'
     payload = {
-     'password': "Andersen_23",
+     'password': config('PASSWORD'),
      'login': 'esdavitnem@gmail.com',
      'redirect_uri': 'https://fantasy.premierleague.com/a/login',
      'app': 'plfpl-web'
